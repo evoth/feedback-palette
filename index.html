@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feedback Palette</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/jquery.guillotine-custom.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.guillotine-custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+
+<body>
+    <div>
+        <input type="file" id="image-input" accept="image/*">
+        <button id="go-button">Make palette</button>
+        <div id="image-canvas-parent" style="width: 1024px; height: 1024px">
+            <canvas id="image-canvas"></canvas>
+        </div>
+    </div>
+</body>
+
+<script src="/js/feedback-palette.js"></script>
+
+</html>
