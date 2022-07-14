@@ -2,8 +2,6 @@
 var image;
 // Image canvas jQuery object
 var imageCanvas = $('#image-canvas');
-// Parent jQuery object (to get its size)
-var imageCanvasParent = $('#image-canvas-parent');
 // Canvas context
 var imageCxt = imageCanvas[0].getContext("2d");
 // Whether to cancel zoom
@@ -34,7 +32,10 @@ function clearCanvas() {
     // If we're currently zooming in, stop
     zoomCancel = true;
     // Reset canvas scale
-    imageCanvas.css('transform', '');
+    imageCanvas.css({
+        'width': '',
+        'aspect-ratio': '',
+    });
 }
 
 // Gets image from user, displays it, and initiates cropping via Guillotine
@@ -44,6 +45,9 @@ imgInput.addEventListener('change', function (e) {
         // Reset effects on canvas
         clearCanvas();
         imageCanvas.hide();
+
+        // Sets filename text in custom file input
+        $("#image-name").text(e.target.files[0].name);
 
         // Gets the (first) image the user selected
         let imageFile = e.target.files[0];
@@ -100,8 +104,8 @@ $('#go-button').click(function () {
     imageCanvas[0].width = cropWidth;
     imageCanvas[0].height = cropWidth;
     imageCanvas.css({
-        'transform-origin': 'top left',
-        'transform': 'scale(' + (imageCanvasParent.width() / imageCanvas[0].width) + ')',
+        'width': '100%',
+        'aspect-ratio': '1',
     });
 
     // Draws the image on the canvas with the crop returned from Guillotine

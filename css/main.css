@@ -1,3 +1,47 @@
+/* Prevents image canvas from taking up too much space  */
 #image-canvas-parent {
+    border-radius: 4px;
     overflow: hidden;
+}
+
+/* Huge title text */
+.title.is-size-0 {
+    font-size: 60px;
+}
+
+/* Link animations */
+.link-light {
+    position: relative;
+    color: #000;
+    text-decoration: none;
+}
+
+.link-light:hover {
+    color: #000;
+}
+
+.link-light::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 0.5px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.link-light:hover::before {
+    transform: scaleX(1);
+}
+
+.link-light {
+    color: rgb(215, 203, 255);
+    transition: color 0.3s ease;
+}
+
+.link-light:hover {
+    color: rgb(255, 255, 255);
 }

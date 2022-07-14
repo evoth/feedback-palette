@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+// Import the Poppins font from Google
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+// Update Bulma's global variables
+$family-sans-serif: "Poppins", sans-serif;
+$primary: rgb(93, 77, 151);
+$info: rgb(157, 138, 226);
+$text-strong: white;
+$white-themed: rgb(31, 31, 31);
+$white-themed-invert: findColorInvert($white-themed);
+$black-themed: white;
+$black-themed-invert: findColorInvert($black-themed);
+$custom-colors: (
+  "white-themed": ($white-themed, $white-themed-invert),
+  "black-themed": ($black-themed, $black-themed-invert),
+);
+
+// Import necessary Bulma components
+@import "../../node/node_modules/bulma/sass/utilities/_all.sass";
+@import "../../node/node_modules/bulma/sass/base/_all.sass";
+@import "../../node/node_modules/bulma/sass/helpers/_all.sass";
+@import "../../node/node_modules/bulma/sass/elements/title.sass";
+@import "../../node/node_modules/bulma/sass/layout/hero.sass";
+@import "../../node/node_modules/bulma/sass/layout/section.sass";
+@import "../../node/node_modules/bulma/sass/grid/columns.sass";
+@import "../../node/node_modules/bulma/sass/elements/container.sass";
+@import "../../node/node_modules/bulma/sass/elements/other.sass";
+@import "../../node/node_modules/bulma/sass/elements/content.sass";
+@import "../../node/node_modules/bulma/sass/form/_all.sass";
+@import "../../node/node_modules/bulma/sass/elements/button.sass";

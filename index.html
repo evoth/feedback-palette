@@ -3,22 +3,103 @@
 
 <head>
     <title>Feedback Palette</title>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/jquery.guillotine-custom.css">
+    <link id="bulma-css" rel="stylesheet" type="text/css" href="/css/bulma-custom-light.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link id="theme-css" rel="stylesheet" type="text/css" href="/css/theme-light.css">
+    <!-- Javascript -->
+    <script src="https://kit.fontawesome.com/a00713ef8f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/js/jquery.guillotine-custom.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/jquery.guillotine-custom.css">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script src="/js/cookies.js"></script>
+    <script src="/js/theme.js"></script>
 </head>
 
 <body>
-    <div>
-        <input type="file" id="image-input" accept="image/*">
-        <button id="go-button">Make palette</button>
-        <div id="image-canvas-parent" style="width: 1024px; height: 1024px">
-            <canvas id="image-canvas"></canvas>
+    <!-- Begin title hero -->
+    <section class="hero has-background-primary">
+        <!-- Begin nav -->
+        <div class="hero-head">
+            <div class="columns mt-5 mx-5 is-multiline is-mobile is-vcentered is-centered">
+                <div class="column is-narrow">
+                    <a id="theme-button" title="Toggle dark mode" class="link-light is-medium">
+                        <i class="fa-solid fa-moon fa-lg"></i>
+                    </a>
+                </div>
+                <div class="column is-narrow">
+                    <a href="https://github.com/evoth" target="_blank" title="My Github" class="link-light is-medium">
+                        <i class="fa-brands fa-github fa-lg"></i>
+                    </a>
+                </div>
+                <div class="column is-hidden-mobile"></div>
+                <div class="column is-narrow">
+                    <a href="https://github.com/evoth/feedback-palette" class="link-light">Github Repo</a>
+                </div>
+                <div class="column is-narrow">
+                    <a href="https://ethanvoth.com" class="link-light">Main Website</a>
+                </div>
+            </div>
         </div>
+        <!-- End nav -->
+        <!-- Begin hero body -->
+        <div class="hero-body mb-6">
+            <div class="columns is-centered">
+                <a href="/">
+                    <div class="column has-text-centered is-narrow text-hover-shadow">
+                        <div class="block mb-3">
+                            <h2 class="title block mb-3 is-size-0 has-text-white">
+                                Feedback Palette
+                            </h2>
+                        </div>
+                        <div class="block" style="max-width: 600px; margin-left:auto; margin-right: auto;">
+                            <h2 class="subtitle has-text-primary-light">
+                                Get a color palette for a point in an image, courtesy of feedback loops and
+                                compression
+                                artifacts!
+                            </h2>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- End hero body -->
+    </section>
+    <!-- End title hero -->
+    <div class="container is-max-desktop p-6">
+        <!-- Begin image interface -->
+        <div class="columns">
+            <!-- Begin image cropper -->
+            <div class="column is-two-thirds">
+                <div id="image-canvas-parent" style="width: 100%; aspect-ratio: 1;">
+                    <canvas id="image-canvas"></canvas>
+                </div>
+            </div>
+            <!-- End image cropper -->
+            <!-- Begin image buttons and instructions -->
+            <div class="column is-one-third">
+                <div class="file is-boxed is-info has-name is-fullwidth block">
+                    <label class="file-label">
+                        <input class="file-input" type="file" name="image" id="image-input" accept="image/*">
+                        <span class="file-cta">
+                            <span class="file-label has-text-centered">
+                                Choose image
+                            </span>
+                        </span>
+                        <span id="image-name" class="file-name has-text-centered has-text-black-themed">
+                            No image chosen
+                        </span>
+                    </label>
+                </div>
+                <button id="go-button" class="button p-5 is-info is-fullwidth block">Make palette</button>
+            </div>
+            <!-- End image buttons and instructions -->
+        </div>
+        <!-- End Image Interface -->
     </div>
 </body>
 
+<!-- Main feedback palette script -->
 <script src="/js/feedback-palette.js"></script>
 
 </html>
