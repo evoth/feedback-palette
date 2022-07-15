@@ -3,3 +3,6 @@
 
 # Bulma files
 css/bulma*.css
+
+# Pixelmatch
+js/pixelmatch.js

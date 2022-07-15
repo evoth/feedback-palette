@@ -2,6 +2,8 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Feedback Palette</title>
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/css/jquery.guillotine-custom.css">
@@ -45,22 +47,20 @@
         <!-- Begin hero body -->
         <div class="hero-body mb-6">
             <div class="columns is-centered">
-                <a href="/">
-                    <div class="column has-text-centered is-narrow text-hover-shadow">
-                        <div class="block mb-3">
-                            <h2 class="title block mb-3 is-size-0 has-text-white">
-                                Feedback Palette
-                            </h2>
-                        </div>
-                        <div class="block" style="max-width: 600px; margin-left:auto; margin-right: auto;">
-                            <h2 class="subtitle has-text-primary-light">
-                                Get a color palette for a point in an image, courtesy of feedback loops and
-                                compression
-                                artifacts!
-                            </h2>
-                        </div>
+                <div class="column has-text-centered is-narrow text-hover-shadow">
+                    <div class="block mb-3">
+                        <h2 class="title block mb-3 is-size-0 has-text-white">
+                            Feedback Palette
+                        </h2>
                     </div>
-                </a>
+                    <div class="block" style="max-width: 600px; margin-left:auto; margin-right: auto;">
+                        <h2 class="subtitle has-text-primary-light">
+                            Get a color palette for a point in an image, courtesy of feedback loops and
+                            compression
+                            artifacts!
+                        </h2>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- End hero body -->
@@ -68,35 +68,64 @@
     <!-- End title hero -->
     <div class="container is-max-desktop p-6">
         <!-- Begin image interface -->
-        <div class="columns">
-            <!-- Begin image cropper -->
-            <div class="column is-two-thirds">
-                <div id="image-canvas-parent" style="width: 100%; aspect-ratio: 1;">
-                    <canvas id="image-canvas"></canvas>
-                </div>
-            </div>
-            <!-- End image cropper -->
+        <div class="columns reverse-row-order">
             <!-- Begin image buttons and instructions -->
             <div class="column is-one-third">
                 <div class="file is-boxed is-info has-name is-fullwidth block">
                     <label class="file-label">
                         <input class="file-input" type="file" name="image" id="image-input" accept="image/*">
                         <span class="file-cta">
-                            <span class="file-label has-text-centered">
-                                Choose image
-                            </span>
+                            <div class="columns is-gapless is-mobile">
+                                <div class="column">
+                                    <span class="icon mr-3">
+                                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                    </span>
+                                </div>
+                                <div class="column">
+                                    <span class="file-label">Choose image</span>
+                                </div>
+                            </div>
                         </span>
                         <span id="image-name" class="file-name has-text-centered has-text-black-themed">
                             No image chosen
                         </span>
                     </label>
                 </div>
-                <button id="go-button" class="button p-5 is-info is-fullwidth block">Make palette</button>
+                <button id="reset-button" class="button p-5 is-info is-fullwidth block">
+                    <span class="icon">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </span>
+                    <span>Reset image</span>
+                </button>
+                <button id="go-button" class="button p-5 is-info is-fullwidth block">
+                    <span class="icon">
+                        <i class="fa-solid fa-play"></i>
+                    </span>
+                    <span>Make palette</span>
+                </button>
+                <p id="instructions" class="subtitle has-text-black-themed block"></p>
             </div>
             <!-- End image buttons and instructions -->
+            <!-- Begin image cropper -->
+            <div class="column is-two-thirds">
+                <div id="image-canvas-parent">
+                    <h2 id="image-instructions" class="subtitle has-text-black-themed has-text-centered">
+                        Choose an image using the button or drop an image here to get started.</h2>
+                    <canvas id="image-canvas"></canvas>
+                    <img id="image-crosshairs" src="/img/crosshairs.svg">
+                </div>
+            </div>
+            <!-- End image cropper -->
         </div>
-        <!-- End Image Interface -->
+        <!-- End image interface -->
     </div>
+    <!-- Begin image drop overlay -->
+    <div id="image-drop-overlay">
+        <h2 class="title is-size-1 has-text-white has-text-centered">
+            Drop image here!
+        </h2>
+    </div>
+    <!-- End image drop overlay -->
 </body>
 
 <!-- Main feedback palette script -->
