@@ -56,6 +56,17 @@ function clearCanvas() {
     });
 }
 
+// Gets an SVG element by id, and returns a data URL representing it.
+// It also sets the fill attribute of each child element to its computed CSS value.
+function svgToUrl(id) {
+    $("#" + id).children().each(function () {
+        $(this).attr("fill", $(this).css("fill"));
+    });
+    let svgString = new XMLSerializer().serializeToString(document.getElementById(id));
+    let svgBase64 = window.btoa(svgString);
+    return "data:image/svg+xml;base64," + svgBase64;
+}
+
 // Gets image from user, displays it, and initiates cropping via Guillotine
 function loadImage(file) {
     // Reset effects on canvas
@@ -111,7 +122,7 @@ function loadImage(file) {
             // Hide instructions, make checkered background, show crosshairs, show buttons
             imageCanvas.show();
             $("#image-instructions").hide();
-            $("#image-canvas-parent").css("background", "url('/img/checkers.svg') 0 0 / 12.5% 12.5%");
+            $("#image-canvas-parent").css("background", `url(${svgToUrl("checkers")}) 0 0 / 12.5% 12.5%`);
             $("#image-crosshairs").show();
             $("#go-button").show();
             $("#reset-button").show();

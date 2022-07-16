@@ -72,7 +72,7 @@
         <!-- End hero body -->
     </section>
     <!-- End title hero -->
-    <div class="container is-max-widescreen p-6">
+    <div class="container is-max-widescreen py-6">
         <!-- Begin image interface section -->
         <section id="image" class="section">
             <h2 class="title is-size-2">
@@ -119,6 +119,13 @@
                 <!-- Begin image cropper -->
                 <div class="column is-two-thirds">
                     <div id="image-canvas-parent">
+                        <svg id="checkers" preserveAspectRatio="none" viewBox="0 0 10 10"
+                            xmlns="http://www.w3.org/2000/svg" style="display: none">
+                            <rect x="0" y="0" width="5" height="5" fill-opacity="0.25" />
+                            <rect x="5" y="5" width="5" height="5" fill-opacity="0.25" />
+                            <rect x="5" y="0" width="5" height="5" fill-opacity="0.1" />
+                            <rect x="0" y="5" width="5" height="5" fill-opacity="0.1" />
+                        </svg>
                         <h2 id="image-instructions" class="subtitle has-text-black-themed">
                             Choose an image using the button or drop an image here to get started.</h2>
                         <canvas id="image-canvas"></canvas>

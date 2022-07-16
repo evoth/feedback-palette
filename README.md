@@ -22,9 +22,6 @@ One day, I was messing around in OBS, and I ended up making a feedback loop wher
    5. Finally, it converts the colors to multiple formats (using [color-convert](https://github.com/Qix-/color-convert)) and, for each color, the program adds a new HTML element with all of the color's information to the page.
 
 ## Todo
-- Custom 404 page
 - Split Javascript into multiple files?
-- const
-- Colors of checkers svg should be dynamic in case I change the theme
+- Code style
 - Make a script to update the HTML text from the README
-- Link styling

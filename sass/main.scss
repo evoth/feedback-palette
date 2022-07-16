@@ -3,6 +3,11 @@ html {
     background-color: $white-themed;
 }
 
+/* Dynamically colors checkers rectangles */
+#checkers rect {
+    fill: $info;
+}
+
 /* Prevents image canvas from taking up too much space  */
 #image-canvas-parent {
     border-radius: 10px;
@@ -127,7 +132,7 @@ html {
 }
 
 .link-light {
-    color: rgb(215, 203, 255);
+    color: lighten($primary, 40%);
     transition: color 0.3s ease;
 }
 
