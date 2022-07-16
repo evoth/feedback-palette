@@ -7,15 +7,17 @@
     <title>Feedback Palette</title>
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/css/jquery.guillotine-custom.css">
-    <link id="bulma-css" rel="stylesheet" type="text/css" href="/css/bulma-custom-light.css">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link id="theme-css" rel="stylesheet" type="text/css" href="/css/theme-light.css">
     <!-- Javascript -->
     <script src="https://kit.fontawesome.com/a00713ef8f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/js/jquery.guillotine-custom.js"></script>
+    <script src="/js/ntc.js"></script>
+    <script type="module" src="/js/color-convert-index.js"></script>
+    <script type="module" src="/js/delta-e-index.js"></script>
     <script src="/js/cookies.js"></script>
     <script src="/js/theme.js"></script>
+    <script type="module" src="/js/feedback-palette.js" defer></script>
 </head>
 
 <body>
@@ -66,58 +68,122 @@
         <!-- End hero body -->
     </section>
     <!-- End title hero -->
-    <div class="container is-max-desktop p-6">
-        <!-- Begin image interface -->
-        <div class="columns reverse-row-order">
-            <!-- Begin image buttons and instructions -->
-            <div class="column is-one-third">
-                <div class="file is-boxed is-info has-name is-fullwidth block">
-                    <label class="file-label">
-                        <input class="file-input" type="file" name="image" id="image-input" accept="image/*">
-                        <span class="file-cta">
-                            <div class="columns is-gapless is-mobile">
-                                <div class="column">
-                                    <span class="icon mr-3">
-                                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                                    </span>
+    <div class="container is-max-widescreen p-6">
+        <!-- Begin image interface section -->
+        <section id="image" class="section">
+            <h2 class="title is-size-2 has-text-centered mt-0 mb-6">
+                Make palette from image
+            </h2>
+            <div class="columns reverse-row-order">
+                <!-- Begin image buttons and instructions -->
+                <div class="column is-one-third">
+                    <div class="file is-boxed is-info has-name is-fullwidth block">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="image" id="image-input" accept="image/*">
+                            <span class="file-cta">
+                                <div class="columns is-gapless is-mobile">
+                                    <div class="column">
+                                        <span class="icon mr-3">
+                                            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                        </span>
+                                    </div>
+                                    <div class="column">
+                                        <span class="file-label">Choose image</span>
+                                    </div>
                                 </div>
-                                <div class="column">
-                                    <span class="file-label">Choose image</span>
-                                </div>
+                            </span>
+                            <span id="image-name" class="file-name has-text-centered has-text-black-themed">
+                                No image chosen
+                            </span>
+                        </label>
+                    </div>
+                    <button id="reset-button" class="button p-5 is-info is-fullwidth block">
+                        <span class="icon">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </span>
+                        <span>Reset image</span>
+                    </button>
+                    <button id="go-button" class="button p-5 is-info is-fullwidth block">
+                        <span class="icon">
+                            <i class="fa-solid fa-play"></i>
+                        </span>
+                        <span>Make palette</span>
+                    </button>
+                    <p id="instructions" class="subtitle has-text-black-themed block"></p>
+                </div>
+                <!-- End image buttons and instructions -->
+                <!-- Begin image cropper -->
+                <div class="column is-two-thirds">
+                    <div id="image-canvas-parent">
+                        <h2 id="image-instructions" class="subtitle has-text-black-themed has-text-centered">
+                            Choose an image using the button or drop an image here to get started.</h2>
+                        <canvas id="image-canvas"></canvas>
+                        <img id="image-crosshairs" src="/img/crosshairs.svg">
+                    </div>
+                </div>
+                <!-- End image cropper -->
+            </div>
+        </section>
+        <!-- End image interface section -->
+        <!-- Begin colors section -->
+        <section id="colors" class="section">
+            <h2 class="title is-size-2 has-text-centered mt-0 mb-6">
+                Colors from palette
+            </h2>
+            <p class="subtitle has-text-black-themed">
+                Hover over a color below to see its details. Copy a value by pressing the copy icon next to it.
+            </p>
+            <div id="color-cards" class="columns is-mobile is-multiline is-centered">
+                <template id="color-card-template">
+                    <div class="column is-narrow">
+                        <div class="color-card">
+                            <div class="color-card-overlay p-3">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="3" class="color-card-name has-text-centered"></th>
+                                        </tr>
+                                        <tr>
+                                            <th>HEX:</th>
+                                            <td class="color-card-hex"></td>
+                                            <td>
+                                                <a title="Copy HEX" class="color-card-copy has-text-black-themed"><i
+                                                        class="fa-solid fa-copy"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>RGB:</th>
+                                            <td class="color-card-rgb"></td>
+                                            <td>
+                                                <a title="Copy RGB" class="color-card-copy has-text-black-themed"><i
+                                                        class="fa-solid fa-copy"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>HSV:</th>
+                                            <td class="color-card-hsv"></td>
+                                            <td>
+                                                <a title="Copy HSV" class="color-card-copy has-text-black-themed"><i
+                                                        class="fa-solid fa-copy"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>HSL:</th>
+                                            <td class="color-card-hsl"></td>
+                                            <td>
+                                                <a title="Copy HSL" class="color-card-copy has-text-black-themed"><i
+                                                        class="fa-solid fa-copy"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                        </span>
-                        <span id="image-name" class="file-name has-text-centered has-text-black-themed">
-                            No image chosen
-                        </span>
-                    </label>
-                </div>
-                <button id="reset-button" class="button p-5 is-info is-fullwidth block">
-                    <span class="icon">
-                        <i class="fa-solid fa-rotate-right"></i>
-                    </span>
-                    <span>Reset image</span>
-                </button>
-                <button id="go-button" class="button p-5 is-info is-fullwidth block">
-                    <span class="icon">
-                        <i class="fa-solid fa-play"></i>
-                    </span>
-                    <span>Make palette</span>
-                </button>
-                <p id="instructions" class="subtitle has-text-black-themed block"></p>
+                        </div>
+                    </div>
+                </template>
             </div>
-            <!-- End image buttons and instructions -->
-            <!-- Begin image cropper -->
-            <div class="column is-two-thirds">
-                <div id="image-canvas-parent">
-                    <h2 id="image-instructions" class="subtitle has-text-black-themed has-text-centered">
-                        Choose an image using the button or drop an image here to get started.</h2>
-                    <canvas id="image-canvas"></canvas>
-                    <img id="image-crosshairs" src="/img/crosshairs.svg">
-                </div>
-            </div>
-            <!-- End image cropper -->
-        </div>
-        <!-- End image interface -->
+        </section>
+        <!-- End colors section -->
     </div>
     <!-- Begin image drop overlay -->
     <div id="image-drop-overlay">
@@ -127,8 +193,5 @@
     </div>
     <!-- End image drop overlay -->
 </body>
-
-<!-- Main feedback palette script -->
-<script src="/js/feedback-palette.js"></script>
 
 </html>

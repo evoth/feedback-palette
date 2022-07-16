@@ -1,0 +1,11 @@
+$primary: rgb(93, 77, 151);
+$info: rgb(157, 138, 226);
+$text-strong: black;
+$white-themed: white;
+$white-themed-invert: findColorInvert($white-themed);
+$black-themed: black;
+$black-themed-invert: findColorInvert($black-themed);
+$custom-colors: (
+    "white-themed": ($white-themed, $white-themed-invert),
+    "black-themed": ($black-themed, $black-themed-invert),
+);

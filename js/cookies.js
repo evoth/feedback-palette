@@ -11,7 +11,7 @@ function setCookie(name, value) {
     const yearFromNow = new Date();
     yearFromNow.setFullYear(yearFromNow.getFullYear() + 1);
     let expires = "expires=" + yearFromNow.toUTCString();
-    document.cookie = name + "=" + value + "; " + expires + "; path=/; domain=" + domainName + ";";
+    document.cookie = `${name}=${value}; ${expires}; path=/; domain=${domainName};`;
 }
 
 // Gets the value for the cookie with the given name, returning "" if not found

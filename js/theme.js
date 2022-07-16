@@ -1,6 +1,4 @@
 // CSS hrefs for different themes
-const bulmaLightHref = "/css/bulma-custom-light.css";
-const bulmaDarkHref = "/css/bulma-custom-dark.css";
 const themeLightHref = "/css/theme-light.css";
 const themeDarkHref = "/css/theme-dark.css";
 
@@ -36,10 +34,8 @@ function setTheme(themeName, doTransition = true) {
     }
     $("html").promise().done(function () {
         if (themeName === "light") {
-            $("#bulma-css").attr("href", bulmaLightHref);
             $("#theme-css").attr("href", themeLightHref);
         } else {
-            $("#bulma-css").attr("href", bulmaDarkHref);
             $("#theme-css").attr("href", themeDarkHref);
         }
         setCookie("theme", themeName);

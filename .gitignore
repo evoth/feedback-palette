@@ -1,8 +1,19 @@
 # Guillotine files
+# See Guillotine at https://github.com/matiasgali/guillotine
 */jquery.guillotine*
 
-# Bulma files
-css/bulma*.css
+# CSS files (which contain our rendered Sass, including Bulma)
+# See Bulma at https://bulma.io/
+css
 
-# Pixelmatch
-js/pixelmatch.js
+# Name that Color
+# See ntc at https://chir.ag/projects/ntc/
+js/ntc.js
+
+# color-convert files
+# See color-convert at https://github.com/Qix-/color-convert
+js/color-convert*.js
+
+# DeltaE files
+# See DeltaE at https://github.com/zschuessler/DeltaE
+js/delta-e*.js

@@ -5,16 +5,17 @@
 
 // Update Bulma's global variables
 $family-sans-serif: "Poppins", sans-serif;
-$primary: rgb(93, 77, 151);
-$info: rgb(157, 138, 226);
-$white-themed: white;
-$white-themed-invert: findColorInvert($white-themed);
-$black-themed: black;
-$black-themed-invert: findColorInvert($black-themed);
-$custom-colors: (
-  "white-themed": ($white-themed, $white-themed-invert),
-  "black-themed": ($black-themed, $black-themed-invert),
-);
+$card-color: $black-themed;
+$card-background-color: lighten($white-themed, 5%);
+$card-shadow: 0 0 0 0 transparent;
+$table-color: $black-themed;
+$table-background-color: transparent;
+$table-cell-padding: 0.25em 0.25em;
+$radius-small: 6px;
+$radius: 10px;
+$radius-large: 14px;
+$card-radius: $radius;
+$border: $black-themed;
 
 // Import necessary Bulma components
 @import "../../node/node_modules/bulma/sass/utilities/_all.sass";
@@ -29,11 +30,5 @@ $custom-colors: (
 @import "../../node/node_modules/bulma/sass/elements/content.sass";
 @import "../../node/node_modules/bulma/sass/form/_all.sass";
 @import "../../node/node_modules/bulma/sass/elements/button.sass";
-
-// Used to show rows in the correct order on mobile (reversed when in column view otherwise)
-@media only screen and (min-width: $tablet) {
-  .reverse-row-order {
-    display: flex;
-    flex-direction: row-reverse;
-  }
-}
+@import "../../node/node_modules/bulma/sass/components/card.sass";
+@import "../../node/node_modules/bulma/sass/elements/table.sass";
