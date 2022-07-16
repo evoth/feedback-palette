@@ -12,9 +12,7 @@
     <script src="https://kit.fontawesome.com/a00713ef8f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/js/jquery.guillotine-custom.js"></script>
-    <script src="/js/ntc.js"></script>
-    <script type="module" src="/js/color-convert-index.js"></script>
-    <script type="module" src="/js/delta-e-index.js"></script>
+    <script src="/js/ntc-custom.js"></script>
     <script src="/js/cookies.js"></script>
     <script src="/js/theme.js"></script>
     <script type="module" src="/js/feedback-palette.js" defer></script>
@@ -71,7 +69,7 @@
     <div class="container is-max-widescreen p-6">
         <!-- Begin image interface section -->
         <section id="image" class="section">
-            <h2 class="title is-size-2 has-text-centered mt-0 mb-6">
+            <h2 class="title is-size-2 has-text-centered">
                 Make palette from image
             </h2>
             <div class="columns reverse-row-order">
@@ -109,14 +107,14 @@
                         </span>
                         <span>Make palette</span>
                     </button>
-                    <p id="instructions" class="subtitle has-text-black-themed block"></p>
+                    <p id="instructions" class="has-text-black-themed block"></p>
                 </div>
                 <!-- End image buttons and instructions -->
                 <!-- Begin image cropper -->
                 <div class="column is-two-thirds">
                     <div id="image-canvas-parent">
-                        <h2 id="image-instructions" class="subtitle has-text-black-themed has-text-centered">
-                            Choose an image using the button or drop an image here to get started.</h2>
+                        <p id="image-instructions" class="has-text-black-themed">
+                            Choose an image using the button or drop an image here to get started.</p>
                         <canvas id="image-canvas"></canvas>
                         <img id="image-crosshairs" src="/img/crosshairs.svg">
                     </div>
@@ -127,13 +125,13 @@
         <!-- End image interface section -->
         <!-- Begin colors section -->
         <section id="colors" class="section">
-            <h2 class="title is-size-2 has-text-centered mt-0 mb-6">
+            <h2 class="title is-size-2 has-text-centered">
                 Colors from palette
             </h2>
-            <p class="subtitle has-text-black-themed">
+            <p class="has-text-black-themed block">
                 Hover over a color below to see its details. Copy a value by pressing the copy icon next to it.
             </p>
-            <div id="color-cards" class="columns is-mobile is-multiline is-centered">
+            <div id="color-cards" class="columns is-mobile is-multiline is-centered block">
                 <template id="color-card-template">
                     <div class="column is-narrow">
                         <div class="color-card">
@@ -184,6 +182,56 @@
             </div>
         </section>
         <!-- End colors section -->
+        <!-- Begin inspiration section -->
+        <section id="inspiration" class="section">
+            <h2 class="title is-size-2 has-text-centered">
+                Inspiration
+            </h2>
+            <p class="has-text-black-themed">
+                One day, I was messing around in OBS, and I ended up making a feedback loop where the image was getting
+                magnified each frame. To my surprise, instead of devolving into chaos or zooming in on a single color, a
+                stable pattern emerged from the image. I suspect that this is a byproduct of a simple bilinear or
+                bicubic interpolation algorithm.
+            </p>
+        </section>
+        <!-- End inspiration section -->
+        <!-- Begin how it works section -->
+        <section id="how-it-works" class="section">
+            <h2 class="title is-size-2 has-text-centered">
+                How it works
+            </h2>
+            <div class="content has-text-black-themed">
+                <h3>Making a palette from an image</h3>
+                <ol>
+                    <li>The image is loaded and made draggable (using <a
+                            href="https://github.com/matiasgali/guillotine">Guillotine</a>) so that you can position the
+                        center where you want.</li>
+                    <li>Once you've positioned the image, it's cropped and printed onto an HTML canvas.</li>
+                    <li>Then, it gets the current content of the canvas (the image) and enlarges it by 1%.</li>
+                    <li>Finally, it re-draws this larger version of the image onto the canvas.</li>
+                    <li>Steps 3-4 are repeated 60 times per second for 8.5 seconds (enough time for the image to
+                        stabilize). It's this iterative process of magnifying and re-encoding the image that produces
+                        the radial artifacts, though I'm not sure why or how.</li>
+                </ol>
+                <h3>Getting colors from the palette image</h3>
+                <ol>
+                    <li>The program samples the color of a pixel for every 5 degrees along a circle around the image.
+                    </li>
+                    <li>For every pixel, it finds the nearest color to the pixel's color that has a name (using <a
+                            href="https://chir.ag/projects/ntc/">Name that Color</a>).</li>
+                    <li>If a previous pixel's color had the same name, it adds the new color to the running list of RGB
+                        colors with that name. Otherwise, it stores the new name along with a new list for RGB colors
+                        with that name.</li>
+                    <li>Then, after every pixel is done, it chooses a representative color for each name by averaging
+                        all the colors of pixels that were assigned to that name previously. A color is excluded if it
+                        only appeared once.</li>
+                    <li>Finally, it converts the colors to multiple formats (using <a
+                            href="https://github.com/Qix-/color-convert">color-convert</a>) and, for each color, it adds
+                        a new HTML element with all of its information to the page.</li>
+                </ol>
+            </div>
+        </section>
+        <!-- End how it works section -->
     </div>
     <!-- Begin image drop overlay -->
     <div id="image-drop-overlay">

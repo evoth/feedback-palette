@@ -8,7 +8,7 @@ css
 
 # Name that Color
 # See ntc at https://chir.ag/projects/ntc/
-js/ntc.js
+js/ntc*.js
 
 # color-convert files
 # See color-convert at https://github.com/Qix-/color-convert
