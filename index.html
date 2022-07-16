@@ -113,8 +113,8 @@
                 <!-- Begin image cropper -->
                 <div class="column is-two-thirds">
                     <div id="image-canvas-parent">
-                        <p id="image-instructions" class="has-text-black-themed">
-                            Choose an image using the button or drop an image here to get started.</p>
+                        <h2 id="image-instructions" class="subtitle has-text-black-themed">
+                            Choose an image using the button or drop an image here to get started.</h2>
                         <canvas id="image-canvas"></canvas>
                         <img id="image-crosshairs" src="/img/crosshairs.svg">
                     </div>
@@ -206,8 +206,8 @@
                     <li>The image is loaded and made draggable (using <a
                             href="https://github.com/matiasgali/guillotine">Guillotine</a>) so that you can position the
                         center where you want.</li>
-                    <li>Once you've positioned the image, it's cropped and printed onto an HTML canvas.</li>
-                    <li>Then, it gets the current content of the canvas (the image) and enlarges it by 1%.</li>
+                    <li>Once you've positioned the image, it's cropped and drawn onto an HTML canvas.</li>
+                    <li>Then, program gets the current content of the canvas (the image) and enlarges it by 1%.</li>
                     <li>Finally, it re-draws this larger version of the image onto the canvas.</li>
                     <li>Steps 3-4 are repeated 60 times per second for 8.5 seconds (enough time for the image to
                         stabilize). It's this iterative process of magnifying and re-encoding the image that produces
@@ -217,17 +217,17 @@
                 <ol>
                     <li>The program samples the color of a pixel for every 5 degrees along a circle around the image.
                     </li>
-                    <li>For every pixel, it finds the nearest color to the pixel's color that has a name (using <a
+                    <li>For each pixel, it finds the nearest color to the pixel's color that has a name (using <a
                             href="https://chir.ag/projects/ntc/">Name that Color</a>).</li>
-                    <li>If a previous pixel's color had the same name, it adds the new color to the running list of RGB
-                        colors with that name. Otherwise, it stores the new name along with a new list for RGB colors
-                        with that name.</li>
-                    <li>Then, after every pixel is done, it chooses a representative color for each name by averaging
-                        all the colors of pixels that were assigned to that name previously. A color is excluded if it
-                        only appeared once.</li>
+                    <li>If any previous pixel's color had the same name, it adds the new color to the running list of
+                        RGB colors with that name. Otherwise, it stores the new name along with a new list for RGB
+                        colors with that name.</li>
+                    <li>Then, after all the pixels are done, it chooses a representative color for each name by
+                        averaging all the colors of the pixels that had been assigned to that name previously. A color
+                        is excluded if it only appeared once.</li>
                     <li>Finally, it converts the colors to multiple formats (using <a
-                            href="https://github.com/Qix-/color-convert">color-convert</a>) and, for each color, it adds
-                        a new HTML element with all of its information to the page.</li>
+                            href="https://github.com/Qix-/color-convert">color-convert</a>) and, for each color, the
+                        program adds a new HTML element with all of the color's information to the page.</li>
                 </ol>
             </div>
         </section>
