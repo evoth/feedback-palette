@@ -22,7 +22,6 @@ One day, I was messing around in OBS, and I ended up making a feedback loop wher
    5. Finally, it converts the colors to multiple formats (using [color-convert](https://github.com/Qix-/color-convert)) and, for each color, the program adds a new HTML element with all of the color's information to the page.
 
 ## Todo
-- Favicon
 - Custom 404 page
 - Split Javascript into multiple files?
 - const
