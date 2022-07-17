@@ -18,6 +18,8 @@ $radius: 10px;
 $radius-large: 14px;
 $card-radius: $radius;
 $border: $black-themed;
+$footer-background-color: $primary;
+$footer-color: white;
 
 // Import necessary Bulma components
 @import "../../node/node_modules/bulma/sass/utilities/_all.sass";
@@ -34,3 +36,4 @@ $border: $black-themed;
 @import "../../node/node_modules/bulma/sass/elements/button.sass";
 @import "../../node/node_modules/bulma/sass/components/card.sass";
 @import "../../node/node_modules/bulma/sass/elements/table.sass";
+@import "../../node/node_modules/bulma/sass/layout/footer.sass";
