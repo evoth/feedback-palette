@@ -1,5 +1,5 @@
 # Feedback Palette
-Get a color palette for a point in an image, courtesy of feedback loops and compression artifacts!
+Get a color palette for a point in an image, courtesy of feedback loops and interpolation artifacts!
 
 ## Website
 See it in action at https://palette.ethanvoth.com!
@@ -25,3 +25,4 @@ One day, I was messing around in OBS, and I ended up making a feedback loop wher
 ## Todo
 - Split Javascript into multiple files?
 - Code style
+- Fix 1 pixel border bug

@@ -40,6 +40,7 @@ const valueCopied = "Copied!";
 $(document).ready(function () {
     $("#go-button").hide();
     $("#reset-button").hide();
+    $("#download-button").hide();
     $("#colors").hide();
 });
 
@@ -76,6 +77,7 @@ function loadImage(file) {
     // Hide and empty colors section
     $("#colors").hide();
     $("#color-cards>div").remove();
+    $("#download-button").hide();
 
     // Populates instructions for image cropping
     $("#instructions").text(instructionsCropImage);
@@ -135,6 +137,16 @@ function hasImage(data) {
     return data.files && data.files[0] && data.files[0].type.split("/")[0] === "image";
 }
 
+// Downloads the canvas as a png with the given name
+function downloadImage(downloadName) {
+    let tempLink = $(document.createElement('a'));
+    tempLink.attr({
+        "download": downloadName,
+        "href": imageCanvas[0].toDataURL(),
+    });
+    tempLink[0].click();
+}
+
 // Loads image when a file is chosen via the file input
 $(document).on("change", "#image-input", function (e) {
     if (hasImage(e.target)) {
@@ -178,6 +190,11 @@ $("#go-button").click(function () {
     zoomStart = performance.now();
     zoomPrevious = zoomStart;
     requestAnimationFrame(zoomAndDraw);
+});
+
+// Downloads the palette image
+$("#download-button").click(function () {
+    downloadImage("palette.png");
 });
 
 // Zoom into image by repeatedly magnifying and re-encoding it at about 60fps, stopping after a predetermined duration
@@ -294,6 +311,7 @@ function getAndShowColors() {
 
     // Shows colors section
     $("#colors").show();
+    $("#download-button").show();
 }
 
 // Copies a value from a color card to the clipboard

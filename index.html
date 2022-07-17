@@ -62,8 +62,7 @@
                     <div class="block" style="max-width: 600px; margin-left:auto; margin-right: auto;">
                         <h2 class="subtitle has-text-primary-light">
                             Get a color palette for a point in an image, courtesy of feedback loops and
-                            compression
-                            artifacts!
+                            interpolation artifacts!
                         </h2>
                     </div>
                 </div>
@@ -88,7 +87,7 @@
                                 <div class="columns is-gapless is-mobile">
                                     <div class="column">
                                         <span class="icon mr-3">
-                                            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                            <i class="fa-solid fa-upload"></i>
                                         </span>
                                     </div>
                                     <div class="column">
@@ -112,6 +111,12 @@
                             <i class="fa-solid fa-play"></i>
                         </span>
                         <span>Make palette</span>
+                    </button>
+                    <button id="download-button" class="button p-5 is-info is-fullwidth block">
+                        <span class="icon">
+                            <i class="fa-solid fa-download"></i>
+                        </span>
+                        <span>Download palette</span>
                     </button>
                     <p id="instructions" class="has-text-black-themed block"></p>
                 </div>
@@ -145,6 +150,7 @@
                 Hover over a color below to see its details. Copy a value by pressing the copy icon next to it.
             </p>
             <div id="color-cards" class="columns is-mobile is-multiline is-centered block">
+                <!-- Begin color card template -->
                 <template id="color-card-template">
                     <div class="column is-narrow">
                         <div class="color-card">
@@ -192,6 +198,7 @@
                         </div>
                     </div>
                 </template>
+                <!-- End color card template -->
             </div>
         </section>
         <!-- End colors section -->
