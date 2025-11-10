@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feedback Palette</title>
+    <!-- Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/icon/favicon.ico">
+    <link rel="manifest" href="/icon/site.webmanifest">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/jquery.guillotine-custom.css">
+    <link id="theme-css" rel="stylesheet" type="text/css" href="/css/theme-light.css">
+    <!-- Javascript -->
+    <script src="https://kit.fontawesome.com/a00713ef8f.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/jquery.guillotine-custom.js"></script>
+    <script src="/js/ntc-custom.js"></script>
+    <script src="/js/cookies.js"></script>
+    <script src="/js/theme.js"></script>
+    <script type="module" src="/js/feedback-palette.js" defer></script>
+</head>
+
+<body>
+    <!-- Begin title hero -->
+    <section class="hero has-background-primary">
+        <!-- Begin nav -->
+        <div class="hero-head">
+            <div class="columns mt-5 mx-5 is-multiline is-mobile is-vcentered is-centered">
+                <div class="column is-narrow">
+                    <a id="theme-button" title="Toggle dark mode" class="link-light is-medium">
+                        <i class="fa-solid fa-moon fa-lg"></i>
+                    </a>
+                </div>
+                <div class="column is-narrow">
+                    <a href="https://github.com/evoth" target="_blank" title="My Github" class="link-light is-medium">
+                        <i class="fa-brands fa-github fa-lg"></i>
+                    </a>
+                </div>
+                <div class="column is-hidden-mobile"></div>
+                <div class="column is-narrow">
+                    <a href="https://github.com/evoth/feedback-palette" target="_blank" class="link-light">Github
+                        Repo</a>
+                </div>
+                <div class="column is-narrow">
+                    <a href="https://ethanvoth.com" target="_blank" class="link-light">Main Website</a>
+                </div>
+            </div>
+        </div>
+        <!-- End nav -->
+        <!-- Begin hero body -->
+        <div class="hero-body mb-6">
+            <div class="columns is-centered">
+                <div class="column has-text-centered is-narrow text-hover-shadow">
+                    <div class="block mb-3">
+                        <h2 class="title block mb-3 is-size-0 has-text-white">
+                            Feedback Palette
+                        </h2>
+                    </div>
+                    <div class="block" style="max-width: 600px; margin-left:auto; margin-right: auto;">
+                        <h2 class="subtitle has-text-primary-light">
+                            Get a color palette for a point in an image, courtesy of feedback loops and
+                            interpolation artifacts!
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End hero body -->
+    </section>
+    <!-- End title hero -->
+    <div class="container is-max-widescreen py-6">
+        <!-- Begin image interface section -->
+        <section id="image" class="section">
+            <h2 class="title is-size-2">
+                Make palette from image
+            </h2>
+            <div class="columns reverse-row-order">
+                <!-- Begin image buttons and instructions -->
+                <div class="column is-one-third">
+                    <div class="file is-boxed is-info has-name is-fullwidth block">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="image" id="image-input" accept="image/*">
+                            <span class="file-cta">
+                                <div class="columns is-gapless is-mobile">
+                                    <div class="column">
+                                        <span class="icon mr-3">
+                                            <i class="fa-solid fa-upload"></i>
+                                        </span>
+                                    </div>
+                                    <div class="column">
+                                        <span class="file-label">Choose image</span>
+                                    </div>
+                                </div>
+                            </span>
+                            <span id="image-name" class="file-name has-text-centered has-text-black-themed">
+                                No image chosen
+                            </span>
+                        </label>
+                    </div>
+                    <button id="reset-button" class="button p-5 is-info is-fullwidth block">
+                        <span class="icon">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </span>
+                        <span>Reset image</span>
+                    </button>
+                    <button id="go-button" class="button p-5 is-info is-fullwidth block">
+                        <span class="icon">
+                            <i class="fa-solid fa-play"></i>
+                        </span>
+                        <span>Make palette</span>
+                    </button>
+                    <button id="download-button" class="button p-5 is-info is-fullwidth block">
+                        <span class="icon">
+                            <i class="fa-solid fa-download"></i>
+                        </span>
+                        <span>Download palette</span>
+                    </button>
+                    <p id="instructions" class="has-text-black-themed block"></p>
+                </div>
+                <!-- End image buttons and instructions -->
+                <!-- Begin image cropper -->
+                <div class="column is-two-thirds">
+                    <div id="image-canvas-parent">
+                        <svg id="checkers" preserveAspectRatio="none" viewBox="0 0 10 10"
+                            xmlns="http://www.w3.org/2000/svg" style="display: none">
+                            <rect x="0" y="0" width="5" height="5" fill-opacity="0.25" />
+                            <rect x="5" y="5" width="5" height="5" fill-opacity="0.25" />
+                            <rect x="5" y="0" width="5" height="5" fill-opacity="0.1" />
+                            <rect x="0" y="5" width="5" height="5" fill-opacity="0.1" />
+                        </svg>
+                        <h2 id="image-instructions" class="subtitle has-text-black-themed">
+                            Choose an image using the button <span class="is-hidden-mobile">on the right</span><span
+                                class="is-hidden-tablet">above</span> or drop an image here to get started.</h2>
+                        <canvas id="image-canvas"></canvas>
+                        <img id="image-crosshairs" src="/img/crosshairs.svg">
+                    </div>
+                </div>
+                <!-- End image cropper -->
+            </div>
+        </section>
+        <!-- End image interface section -->
+        <!-- Begin colors section -->
+        <section id="colors" class="section">
+            <h2 class="title is-size-2">
+                Colors from palette
+            </h2>
+            <p class="has-text-black-themed block">
+                Hover over a color below to see its details. Copy a value by pressing the copy icon next to it.
+            </p>
+            <div id="color-cards" class="columns is-mobile is-multiline is-centered block">
+                <!-- Begin color card template -->
+                <template id="color-card-template">
+                    <div class="column is-narrow">
+                        <div class="color-card">
+                            <div class="color-card-overlay p-3">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="3" class="color-card-name has-text-centered"></th>
+                                        </tr>
+                                        <tr>
+                                            <th>HEX:</th>
+                                            <td class="color-card-hex"></td>
+                                            <td>
+                                                <a title="Copy HEX" class="color-card-copy has-text-black-themed"><i
+                                                        class="fa-solid fa-copy"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>RGB:</th>
+                                            <td class="color-card-rgb"></td>
+                                            <td>
+                                                <a title="Copy RGB" class="color-card-copy has-text-black-themed"><i
+                                                        class="fa-solid fa-copy"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>HSV:</th>
+                                            <td class="color-card-hsv"></td>
+                                            <td>
+                                                <a title="Copy HSV" class="color-card-copy has-text-black-themed"><i
+                                                        class="fa-solid fa-copy"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>HSL:</th>
+                                            <td class="color-card-hsl"></td>
+                                            <td>
+                                                <a title="Copy HSL" class="color-card-copy has-text-black-themed"><i
+                                                        class="fa-solid fa-copy"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <!-- End color card template -->
+            </div>
+        </section>
+        <!-- End colors section -->
+        <!-- Begin info section -->
+        <section id="info" class="section content has-text-black-themed">
+            <h2 class="title is-size-2">Inspiration</h2>
+            <p>One day, I was messing around in OBS, and I ended up making a feedback loop where the image was getting
+                magnified each frame. To my surprise, instead of devolving into chaos or zooming in on a single color, a
+                stable pattern emerged from the image. I suspect that this is a byproduct of a simple bilinear or
+                bicubic interpolation algorithm.</p>
+            <h2 class="title is-size-2">How it works</h2>
+            <h3>Making a palette from an image</h3>
+            <ol>
+                <li>The image is loaded and made draggable (using <a
+                        href="https://github.com/matiasgali/guillotine">Guillotine</a>) so that you can position the
+                    center where you want.</li>
+                <li>Once you&#39;ve positioned the image, it&#39;s cropped and drawn onto an HTML canvas.</li>
+                <li>Then, the program gets the current content of the canvas (the image) and enlarges it by 1%.</li>
+                <li>Finally, it re-draws this larger version of the image onto the canvas.</li>
+                <li>Steps 3-4 are repeated 60 times per second for 8.5 seconds (enough time for the image to stabilize).
+                    It&#39;s this iterative process of magnifying and re-encoding the image that produces the radial
+                    artifacts, though I&#39;m not sure why or how.</li>
+            </ol>
+            <h3>Getting colors from the palette image</h3>
+            <ol>
+                <li>The program samples the color of a pixel for every 5 degrees along a circle around the image.</li>
+                <li>For each pixel, it finds the nearest color to the pixel&#39;s color that has a name (using <a
+                        href="https://chir.ag/projects/ntc/">Name that Color</a>).</li>
+                <li>If any previous pixel&#39;s color had the same name, it adds the new color to the running list of
+                    RGB colors with that name. Otherwise, it stores the new name along with a new list for RGB colors
+                    with that name.</li>
+                <li>Then, after all the pixels are done, it chooses a representative color for each name by averaging
+                    all the colors of the pixels that had been assigned to that name previously. A color is excluded if
+                    it only appeared once.</li>
+                <li>Finally, it converts the colors to multiple formats (using <a
+                        href="https://github.com/Qix-/color-convert">color-convert</a>) and, for each color, the program
+                    adds a new HTML element with all of the color&#39;s information to the page.</li>
+            </ol>
+            <h2 class="title is-size-2">Privacy</h2>
+            <p>This website does not store or upload any images or personal information. The processing is done solely
+                in the client browser on your computer. For more information see the <a
+                    href="https://ethanvoth.com/privacy/#privacy">Privacy Policy</a>.</p>
+        </section>
+        <!-- End info section -->
+    </div>
+    <!-- Begin footer -->
+    <footer class="footer pb-6">
+        <div class="content has-text-centered">
+            Copyright © 2022 Ethan Voth / <a href="https://ethanvoth.com" target="_blank" class="link-light">Website</a>
+            / <a href="https://github.com/evoth" target="_blank" class="link-light">Github</a> / <a
+                href="https://ethanvoth.com/privacy/#privacy" target="_blank" class="link-light">Privacy Policy</a>
+        </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+    <!-- Begin image drop overlay -->
+    <div id="image-drop-overlay">
+        <h2 class="title is-size-1 has-text-white has-text-centered">
+            Drop image here!
+        </h2>
+    </div>
+    <!-- End image drop overlay -->
+</body>
+
+</html>

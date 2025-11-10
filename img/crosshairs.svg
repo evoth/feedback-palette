@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" version="1.1" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+ <ellipse cx="4.9998" cy="4.9998" rx=".18182" ry=".18182" fill="none" stroke="#fff" stroke-width=".05"/>
+ <g fill="#fff">
+  <rect x="5.207" y="4.975" width="4.793" height=".05"/>
+  <rect x="4.975" y="5.207" width=".05" height="4.793"/>
+  <rect x="4.975" width=".05" height="4.793"/>
+  <rect y="4.975" width="4.793" height=".05"/>
+ </g>
+</svg>

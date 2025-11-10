@@ -1,0 +1,149 @@
+/* Background color of page */
+html {
+    background-color: $white-themed;
+}
+
+/* Dynamically colors checkers rectangles */
+#checkers rect {
+    fill: $info;
+}
+
+/* Prevents image canvas from taking up too much space  */
+#image-canvas-parent {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: rgba($info, 0.25);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Instructions text positioned on top of canvas */
+#image-instructions {
+    position: absolute;
+    width: 60%;
+    height: auto;
+    margin: auto;
+}
+
+/* Crosshairs positioned on top of canvas (hidden at first) */
+#image-crosshairs {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    pointer-events: none;
+}
+
+/* Drop zone for images being dragged over page */
+#image-drop-overlay {
+    background: rgba($info, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+#image-drop-overlay>h2 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Color card and hover overlay */
+.color-card {
+    width: 220px;
+    aspect-ratio: 1;
+    border-radius: 10px;
+}
+
+.color-card-overlay {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgba($white-themed, 0.75);
+    opacity: 0;
+    transition: 0.3s ease;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.color-card-overlay:hover {
+    opacity: 1;
+    transition: 0.3s ease;
+}
+
+.color-card-overlay>.table {
+    position: absolute;
+    margin: auto;
+}
+
+/* Huge title text */
+.title.is-size-0 {
+    font-size: 60px;
+}
+
+/* Subtle text shadow on mouse hover */
+.text-hover-shadow {
+    transition: text-shadow .5s ease, transform .5s ease;
+}
+
+.text-hover-shadow:hover {
+    text-shadow: 4px 4px 7px rgba(0, 0, 0, .5);
+    transform: translate(-4px, -4px);
+}
+
+/* Link animations */
+.link-light {
+    position: relative;
+    color: #000;
+    text-decoration: none;
+}
+
+.link-light:hover {
+    color: #000;
+}
+
+.link-light::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 0.5px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.link-light:hover::before {
+    transform: scaleX(1);
+}
+
+.link-light {
+    color: lighten($primary, 40%);
+    transition: color 0.3s ease;
+}
+
+.link-light:hover {
+    color: rgb(255, 255, 255);
+}
+
+/* Used to show rows in the correct order on mobile (reversed when in column view otherwise) */
+@media only screen and (min-width: $tablet) {
+    .reverse-row-order {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+}
