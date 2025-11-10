@@ -26,3 +26,4 @@ One day, I was messing around in OBS, and I ended up making a feedback loop wher
 - Split Javascript into multiple files?
 - Code style
 - Fix 1 pixel border bug
+- Define stopping condition as number of iterations instead of duration

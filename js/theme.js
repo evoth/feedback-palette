@@ -3,7 +3,7 @@ const themeLightHref = "/css/theme-light.css";
 const themeDarkHref = "/css/theme-dark.css";
 
 // Default theme
-const defaultTheme = "light";
+const defaultTheme = "dark";
 
 // Theme transition duration
 const themeTransitionDuration = 600;
